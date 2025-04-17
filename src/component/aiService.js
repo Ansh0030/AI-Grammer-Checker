@@ -5,8 +5,7 @@ export const submitPrompt = async (text) => {
 
   const headers = {
     "Content-Type": "application/json",
-    Authorization:
-      "Bearer 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",
+    // Add Autorization Key into this to call API
   };
 
   const data = {
