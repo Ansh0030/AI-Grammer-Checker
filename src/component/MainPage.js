@@ -7,22 +7,25 @@ export default function MainPage() {
   const [impText, setImpText] = useState("");
 
   useEffect(() => {
-    if (setInputText === "") {
+    if (inputText === "") {
       setImpText("");
     }
-  }, [setInputText]);
+  }, [inputText]);
 
   const clearInput = async () => {
     setInputText("");
   };
 
   const submit = async () => {
-    const dataFetch = await submitPrompt(inputText)
-      .then((res) => res.data)
-      .catch((error) => console.log(error));
-    const reply = dataFetch.data.choices[0]?.message?.content;
-    setImpText(reply);
-    console.log(dataFetch);
+    const result = await submitPrompt(inputText);
+
+    if (result) {
+      const reply = result.candidates?.[0]?.content?.parts?.[0]?.text;
+      setImpText(reply || "No response text found.");
+      console.log(result);
+    } else {
+      setImpText("Something went wrong with the API call.");
+    }
   };
 
   return (
@@ -59,7 +62,6 @@ export default function MainPage() {
 
           <textarea
             className="inputBox"
-            type="text"
             placeholder="Improved text here...!"
             value={impText}
           ></textarea>

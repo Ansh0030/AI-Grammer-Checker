@@ -1,26 +1,29 @@
 import axios from "axios";
 
 export const submitPrompt = async (text) => {
-  const url = "https://api.openai.com/v1/chat/completions";
-
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization:
-      "Bearer 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",
-  };
+  const GEMINI_API_KEY = "AIzaSyAvmNl_VNlmqyYzphCFpFsxqB4Vyf51JZU";
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
   const data = {
-    model: "gpt-4.1-nano", // Or "gpt-4", "gpt-3.5-turbo"
-    messages: [
-      { role: "user", content: `Improve grammer of this text ${text}` },
+    contents: [
+      {
+        parts: [{ text: `Correct grammar of this text: ${text}` }],
+      },
     ],
-    stream: false, // optional
   };
 
   try {
-    const response = await axios.post(url, data, { headers });
+    const response = await axios.post(url, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+
+    console.log("✅ Gemini API Success:", response.data);
+    return response.data;
   } catch (error) {
-    console.error("Axios Error:", error);
-    alert("Something went wrong!");
+    console.error(
+      "❌ Gemini API Error:",
+      error.response || error.message || error
+    );
+    return null;
   }
 };
