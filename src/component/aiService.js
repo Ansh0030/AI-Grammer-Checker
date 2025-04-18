@@ -17,13 +17,10 @@ export const submitPrompt = async (text) => {
       headers: { "Content-Type": "application/json" },
     });
 
-    console.log("✅ Gemini API Success:", response.data);
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error(
-      "❌ Gemini API Error:",
-      error.response || error.message || error
-    );
+    console.error(error.response || error.message || error);
     return null;
   }
 };
