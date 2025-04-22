@@ -65,6 +65,10 @@ export default function MainPage() {
             placeholder="Improved text here...!"
             value={impText}
           ></textarea>
+          <h2 className="mainText">!..Ai IMPROVED TEXT..!</h2>
+          <p className="mainText">
+            Enter your text below and let our AI improve it.
+          </p>
         </div>
       </div>
     </>
