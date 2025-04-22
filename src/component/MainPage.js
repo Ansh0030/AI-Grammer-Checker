@@ -65,6 +65,12 @@ export default function MainPage() {
             placeholder="Improved text here...!"
             value={impText}
           ></textarea>
+
+          <textarea
+            className="inputBox"
+            placeholder="Improved text here...!"
+            value={impText}
+          ></textarea>
         </div>
       </div>
     </>
